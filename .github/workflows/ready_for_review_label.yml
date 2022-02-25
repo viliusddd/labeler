@@ -6,7 +6,7 @@ on:
 
 jobs:
   add_awaiting_CR:
-    if: ${{ !github.event.pull_request.draft }}
+    if: (!github.event.pull_request.draft && contains(github.event.pull_request.labels.*.name, 'ready for merge'))
     runs-on: ubuntu-latest
     steps:
       - name: Add Awaiting CR

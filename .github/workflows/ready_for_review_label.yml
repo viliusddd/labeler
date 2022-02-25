@@ -1,0 +1,15 @@
+name: Labeler
+
+on:
+  pull_request:
+    types: [ready_for_review]
+
+jobs:
+  add_awaiting_CR:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add Awaiting CR
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: awaiting CR

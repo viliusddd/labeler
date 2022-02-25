@@ -1,15 +1,15 @@
-name: Labeler
+name: labeler
 
 on:
   pull_request:
     types: [ready_for_review]
 
 jobs:
-  add_awaiting_CR:
-    # if: {{ !github.event.pull_request.draft }}
+  awaiting_CR:
     if: ${{ ! contains(github.event.pull_request.labels.*.name, 'ready for merge') && ! contains(github.event.pull_request.labels.*.name, 'awaiting second CR') }}
     runs-on: ubuntu-latest
     steps:
+
       - name: Add Awaiting CR
         uses: actions-ecosystem/action-add-labels@v1
         with:

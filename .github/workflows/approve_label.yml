@@ -1,40 +1,36 @@
-name: Labeler
+name: labeler
+
 on:
   pull_request_review:
     types: [submitted]
 
 jobs:
-  add_awaiting_CR:
-    if: ${{ !github.event.pull_request.draft }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Add Awaiting CR
-        uses: actions-ecosystem/action-add-labels@v1
-        with:
-          labels: awaiting CR
-
-  delete_awaiting_CR:
+  awaiting_second_CR:
     if: contains(github.event.pull_request.labels.*.name, 'awaiting CR')
     runs-on: ubuntu-latest
     steps:
+
       - name: Remove awaiting CR
         uses: actions-ecosystem/action-remove-labels@v1
         with:
           labels: awaiting CR
+
       - name: Add Awaiting Second CR
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: awaiting second CR
 
-  delete_awaiting_second_CR:
+  ready_for_merge:
     if: contains(github.event.pull_request.labels.*.name, 'awaiting second CR')
     runs-on: ubuntu-latest
     steps:
-      - name: Remove ready for merge
+
+      - name: Remove Awaiting Second CR
         uses: actions-ecosystem/action-remove-labels@v1
         with:
           labels: awaiting second CR
-      - name: Add ready for merge
+
+      - name: Add Ready for Merge
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: ready for merge

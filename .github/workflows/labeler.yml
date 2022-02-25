@@ -1,10 +1,11 @@
 name: Labeler
+
 on:
   pull_request_review:
     types: [submitted]
 
 jobs:
-  add_awaiting CR:
+  add_awaiting_CR:
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
